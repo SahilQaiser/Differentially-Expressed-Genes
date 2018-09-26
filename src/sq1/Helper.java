@@ -74,7 +74,7 @@ public class Helper {
         try (FileWriter fw = new FileWriter(new File(f))) {
             for(int i=0; i<m.length; i++)
             {
-                fw.write("g"+i+1+","+m[i]+"\n");
+                fw.write("g"+(i+1)+","+m[i]+"\n");
             }
         } catch(IOException e)
         {
