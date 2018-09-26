@@ -12,9 +12,10 @@ public class SAM {
         //Helper.printMatrix(tumor);
         Double Xi[]=Helper.getRowMean(normal);        
         Double Yi[]=Helper.getRowMean(tumor);
-        System.out.println("Normal\t\t\t\t\tTumor");
-        Helper.printMatrix(Helper.getFoldChange(Xi, Yi));
-
+        System.out.println("Enter Filter Value : ");
+        Double filter=(new Scanner(System.in).nextDouble());
+        Helper.printMatrixFiltered(FoldChange.compute(Xi, Yi), filter);
+        
     }
 }
 

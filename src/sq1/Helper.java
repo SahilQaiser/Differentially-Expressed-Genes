@@ -58,16 +58,6 @@ public class Helper {
         }
         return matrix;
     }
-    //Calculate FoldChange
-    static Double[] getFoldChange(Double a[], Double b[])
-    {
-        Double fc[]=new Double[a.length-1];
-        for(int i=0; i<a.length-1; i++)
-        {
-            fc[i]=(b[i]-a[i])/a[i];  // (B-A)/A
-        }
-        return fc;
-    }
     //functions to Print Matrices
     static void printMatrix(Double m[][])           //Print a 2d matrix
     {
@@ -94,5 +84,25 @@ public class Helper {
             {
                 System.out.println(m[i]+"\t\t\t"+n[i]);
             }
+    }
+    static void printMatrixFiltered(Double m[], Double filter) //Print 2 1d Matrices as 2 Columns
+    {
+        for(int i=0; i<m.length; i++)
+            {
+                if(m[i]>=filter){
+                    System.out.println("Gene "+(i+1)+", FoldChange Value : "+m[i]);
+                }
+            }
+    }
+    //Returning Max and Min out of 2
+    static Double max(Double a, Double b)
+    {
+        Double x=(a>b)?(a):(b);
+        return x;
+    }
+    static Double min(Double a, Double b)
+    {
+        Double x=(a>b)?(b):(a);
+        return x;
     }
 }
