@@ -15,7 +15,7 @@ public class SAM {
         System.out.println("Enter Filter Value : ");
         Double filter=(new Scanner(System.in).nextDouble());
         Helper.printMatrixFiltered(FoldChange.compute(Xi, Yi), filter);
-        
+        //Helper.printMatrix(FoldChange.compute(Xi, Yi));
     }
 }
 
