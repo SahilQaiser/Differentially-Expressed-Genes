@@ -1,7 +1,13 @@
 package sq1;
 public class FoldChange {
-   //Calculate FoldChange
-    static Double[] compute(Double a[], Double b[])
+    Double A[][], B[][];
+    FoldChange(Double [][]a, Double [][]b)
+    {
+        A=a;
+        B=b;
+    }
+    //Calculate FoldChange
+    Double[] compute(Double a[], Double b[])
     {
         Double fc[]=new Double[a.length-1];
         for(int i=0; i<a.length-1; i++)

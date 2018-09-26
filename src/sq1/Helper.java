@@ -1,6 +1,7 @@
 package sq1;
 
 import java.io.*;
+import java.util.Objects;
 
 public class Helper {
     static int getNumberOfLines(String f)                               //To get Number of Rows for out Matrix
@@ -12,7 +13,7 @@ public class Helper {
                LineNumberReader count = new LineNumberReader(input);
                while (count.skip(Long.MAX_VALUE) > 0)
                {
-                  // Loop just in case the file is > Long.MAX_VALUE or skip() decides to not read the entire file
+                  //Blank
                }
                lines = count.getLineNumber();
             } catch(IOException e)
@@ -22,7 +23,7 @@ public class Helper {
         
         return lines;
     }
-    //Get Row Mean
+    //Get Mean For all Rows
     static Double[] getRowMean(Double m[][])
     {
         Double mean[]=new Double[m.length-1];
@@ -33,6 +34,15 @@ public class Helper {
             for(Double cell : m[i]){
                 mean[i]=mean[i]+cell;
             }
+        }
+        return mean;
+    }
+    //Get Mean For single Row
+    static Double getRowMean(Double m[])
+    {
+        Double mean=0.0;
+        for(Double cell : m){
+            mean=mean+cell;
         }
         return mean;
     }
@@ -57,6 +67,19 @@ public class Helper {
             j++;
         }
         return matrix;
+    }
+    //Write a 2d Matrix to File
+    static void putMatrix(Double m[], String f) throws IOException
+    {
+        try (FileWriter fw = new FileWriter(new File(f))) {
+            for(int i=0; i<m.length; i++)
+            {
+                fw.write("g"+i+1+","+m[i]+"\n");
+            }
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     //functions to Print Matrices
     static void printMatrix(Double m[][])           //Print a 2d matrix
@@ -85,12 +108,12 @@ public class Helper {
                 System.out.println(m[i]+"\t\t\t"+n[i]);
             }
     }
-    static void printMatrixFiltered(Double m[], Double filter) //Print 2 1d Matrices as 2 Columns
+    static void printMatrixFiltered(Double m[], Double filter) //Print 1d Matrix's Values which are greater than filter
     {
         for(int i=0; i<m.length; i++)
             {
-                if(m[i]>=filter){
-                    System.out.println("Gene "+(i+1)+", FoldChange Value : "+m[i]);
+                if(m[i]>filter){
+                    System.out.println("Gene "+(i+1)+", FoldChange : "+m[i]);
                 }
             }
     }
@@ -104,5 +127,28 @@ public class Helper {
     {
         Double x=(a>b)?(b):(a);
         return x;
+    }
+    
+    //Get Rank of Elements of an array
+    static Double[] rankArray(Double m[])
+    {
+        Double R[]=new Double[m.length];
+        int r,s;
+        for(int i=0; i<m.length; i++)
+        {
+            r=s=1;
+            for(int j=0; j<m.length; j++)
+            {
+                if(i!=j && m[i]>m[j])
+                {
+                    r++;
+                } else if(i!=j && Objects.equals(m[i], m[j]))
+                {
+                    s++;
+                }
+            }
+            R[i]=(Double.valueOf(r)+(s-1)*0.5);
+        }
+        return R;
     }
 }
