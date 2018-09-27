@@ -17,9 +17,11 @@ public class Main {
         Helper.printMatrixFiltered(deg, filter);
         System.out.println("Results from FoldChange [Mean] :");
         Helper.printMatrixFiltered(degFC1, filter);
-        System.out.println("Results from FoldChange [Median] :");
-        Helper.printMatrixFiltered(degFC2, filter);
-        Helper.putMatrix(deg,degFC1, args[2]);
+        //System.out.println("Results from FoldChange [Median] :");
+        //Helper.printMatrixFiltered(degFC2, filter);
+        Helper.putMatrix(deg,degFC1, args[2]);  //Writing to Output File degs.csv
+        TTest tSimple = new TTest(normal,tumor);
+        Helper.printMatrix(tSimple.computeSimple());
     }
 }
 

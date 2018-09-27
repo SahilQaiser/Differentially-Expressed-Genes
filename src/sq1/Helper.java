@@ -144,7 +144,7 @@ public class Helper {
     {
         for(Double j:m)
             {
-                System.out.println(j+"  ");
+                System.out.println(j);
             }
     }
     static void printMatrix(Double m[], Double n[]) //Print 2 1d Matrices as 2 Columns
@@ -198,7 +198,7 @@ public class Helper {
         return R;
     }
     
-    //Standard Deviation
+    //Standard Deviation For 2 Arrays
     static Double s(int i,Double [][]A, Double[][] B) //Standard Deviation
     {
         Double x,XA,XB,a;
@@ -218,6 +218,20 @@ public class Helper {
         a=((1/lenA)+(1/lenB))/(lenA+lenB-2);
         x=a*(XA+XB);
         x=Math.sqrt(x);
+        return x;
+    }
+    //Variation For an Array s=(x-x`)^2/n
+    static Double var(int i,Double [][]A) //Standard Deviation
+    {
+        Double x,XA;
+        XA=0.0;
+        for(int j=0; j<A[0].length; j++)
+        {
+            Double t1=A[i][j]-getRowMean(A[i]);
+            XA+=(t1*t1);
+        }
+        Double lenA=new Double(A[0].length);
+        x=(XA)/lenA;
         return x;
     }
     
