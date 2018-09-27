@@ -28,7 +28,6 @@ public class Helper {
     static Double[] getRowMean(Double m[][])
     {
         Double mean[]=new Double[m.length];
-        int j=0;
         for(int i=0; i<m.length; i++)
         {
             mean[i]=0.0;
@@ -47,6 +46,21 @@ public class Helper {
         }
         return mean/m.length;
     }
+    //Get Median
+    static Double[] getRowMedian(Double m[][])
+    {
+        Double median[]=new Double[m.length];
+        for(int i=0; i<m.length; i++)
+        {
+            median[i]=m[i][0];
+            Double row[]=m[i];
+            Arrays.sort(row);
+            median[i]=row[(1+row.length)/2];            
+        }
+        return median;
+    }
+    
+    
     //Get A 2d matrix for a File
     static Double[][] getMatrix(String f1) throws IOException
     {

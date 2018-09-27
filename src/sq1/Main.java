@@ -11,13 +11,15 @@ public class Main {
         SAM sam = new SAM(normal,tumor);
         FoldChange fc = new FoldChange(normal,tumor);
         Double deg[]=sam.compute();
-        Double degFC[]=fc.compute();
+        Double degFC1[]=fc.computeByMean();
+        Double degFC2[]=fc.computeByMedian();
         System.out.println("Results from SAM:");
         Helper.printMatrixFiltered(deg, filter);
-        System.out.println("Results from FoldChange:");
-        Helper.printMatrixFiltered(degFC, filter);
-        Helper.putMatrix(deg,degFC, "output.csv");
-        
+        System.out.println("Results from FoldChange [Mean] :");
+        Helper.printMatrixFiltered(degFC1, filter);
+        System.out.println("Results from FoldChange [Median] :");
+        Helper.printMatrixFiltered(degFC2, filter);
+        Helper.putMatrix(deg,degFC1, "degs.csv");
     }
 }
 
