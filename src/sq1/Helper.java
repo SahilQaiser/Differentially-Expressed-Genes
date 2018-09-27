@@ -44,7 +44,7 @@ public class Helper {
         for(Double cell : m){
             mean=mean+cell;
         }
-        return mean;
+        return mean/m.length;
     }
     //Get A 2d matrix for a File
     static Double[][] getMatrix(String f1) throws IOException
@@ -150,5 +150,45 @@ public class Helper {
             R[i]=(Double.valueOf(r)+(s-1)*0.5);
         }
         return R;
+    }
+    
+    //Standard Deviation
+    static Double s(int i,Double [][]A, Double[][] B) //Standard Deviation
+    {
+        Double x,XA,XB,a;
+        XB=XA=0.0;
+        for(int j=0; j<A[0].length; j++)
+        {
+            Double t1=A[i][j]-Helper.getRowMean(A[i]);
+            XA+=(t1*t1);
+        }
+        for(int j=0; j<B[0].length; j++)
+        {
+            Double t2=B[i][j]-Helper.getRowMean(B[i]);
+            XB+=(t2*t2);
+        }
+        Double lenA=new Double(A[0].length);
+        Double lenB=new Double(B[0].length);
+        a=((1/lenA)+(1/lenB))/(lenA+lenB-2);
+        x=a*(XA+XB);
+        x=Math.sqrt(x);
+        return x;
+    }
+    
+    //Percentile... S0
+    static Double s0(Double [][]A,Double [][]B)
+    {
+        Double x[]=new Double[A.length];
+        for(int i=0; i<A.length; i++)
+        {
+            x[i]=s(i,A,B);
+        }
+        System.out.println("Before Rankings..");
+        printMatrix(x);
+        x=Helper.rankArray(x);
+        System.out.println("Matrix Rankings..");
+        printMatrix(x);
+        int y=5*A.length/100;           //5th Percentile
+        return x[y-1];
     }
 }
