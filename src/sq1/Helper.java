@@ -2,6 +2,7 @@ package sq1;
 
 import java.io.*;
 import java.util.Objects;
+import java.util.*;
 
 public class Helper {
     static int getNumberOfLines(String f)                               //To get Number of Rows for out Matrix
@@ -159,12 +160,12 @@ public class Helper {
         XB=XA=0.0;
         for(int j=0; j<A[0].length; j++)
         {
-            Double t1=A[i][j]-Helper.getRowMean(A[i]);
+            Double t1=A[i][j]-getRowMean(A[i]);
             XA+=(t1*t1);
         }
         for(int j=0; j<B[0].length; j++)
         {
-            Double t2=B[i][j]-Helper.getRowMean(B[i]);
+            Double t2=B[i][j]-getRowMean(B[i]);
             XB+=(t2*t2);
         }
         Double lenA=new Double(A[0].length);
@@ -178,17 +179,30 @@ public class Helper {
     //Percentile... S0
     static Double s0(Double [][]A,Double [][]B)
     {
-        Double x[]=new Double[A.length];
+        Double x1[]=new Double[A.length];
+        Double x2[][]=new Double[2][A.length];
         for(int i=0; i<A.length; i++)
         {
-            x[i]=s(i,A,B);
+            x1[i]=s(i,A,B);
+            x2[0]=x1;
         }
-        System.out.println("Before Rankings..");
-        printMatrix(x);
-        x=Helper.rankArray(x);
-        System.out.println("Matrix Rankings..");
-        printMatrix(x);
-        int y=5*A.length/100;           //5th Percentile
-        return x[y-1];
+        x1=rankArray(x1);
+        x2[1]=x1;
+        int y=getIndex(x2,(5*A.length/100));        //5th Percentile for s(i)
+        return x2[0][y];
+    }
+    //GetIndex for S0
+    static int getIndex(Double [][]A,int y)
+    {
+        int x=-1;
+        Double index=new Double(y);
+        for(int i=0; i<A[1].length; i++)
+        {
+            if(Objects.equals(A[1][i], index))
+            {
+                x=i;
+            }
+        }
+        return x;
     }
 }
