@@ -1,12 +1,18 @@
 # MutatedGenes (NetBeans)
 
 ## Methods Included
-* FoldChange
-####	- Mean Method
+#### * FoldChange
+######	- Mean Method
 	`Deg[I] = max(Xi,Yi)/min(Xi,Yi)`
 
 		Xi - Mean of ith Gene Expression from 1st input file
 		Yi - Mean of ith Gene Expression from 2nd input file
+		
+######	- Median Method
+	`Deg[I] = max(Xi,Yi)/min(Xi,Yi)`
+
+		Xi - Median of ith Gene Expression from 1st input file
+		Yi - Median of ith Gene Expression from 2nd input file
 
 #### * Significance Analysis of MicroArrays
 	`Deg[I] = (Xi-Yi)/(s(i)+s0)`
