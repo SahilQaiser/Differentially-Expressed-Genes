@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.*;
 
 public class Helper {
-    static int getNumberOfLines(String f)                               //To get Number of Rows for out Matrix
+    static int getNumberOfLines(String f)                       //To get Number of Rows for out Matrix
     {
         int lines=0;
         try
@@ -30,10 +30,7 @@ public class Helper {
         Double mean[]=new Double[m.length];
         for(int i=0; i<m.length; i++)
         {
-            mean[i]=0.0;
-            for(Double cell : m[i]){
-                mean[i]=mean[i]+cell;
-            }
+            mean[i]=getRowMean(m[i]);
         }
         return mean;
     }

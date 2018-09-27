@@ -19,7 +19,7 @@ public class Main {
         Helper.printMatrixFiltered(degFC1, filter);
         System.out.println("Results from FoldChange [Median] :");
         Helper.printMatrixFiltered(degFC2, filter);
-        Helper.putMatrix(deg,degFC1, "degs.csv");
+        Helper.putMatrix(deg,degFC1, args[2]);
     }
 }
 
