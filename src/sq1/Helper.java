@@ -27,9 +27,9 @@ public class Helper {
     //Get Mean For all Rows
     static Double[] getRowMean(Double m[][])
     {
-        Double mean[]=new Double[m.length-1];
+        Double mean[]=new Double[m.length];
         int j=0;
-        for(int i=0; i<m.length-1; i++)
+        for(int i=0; i<m.length; i++)
         {
             mean[i]=0.0;
             for(Double cell : m[i]){
@@ -69,13 +69,47 @@ public class Helper {
         }
         return matrix;
     }
-    //Write a 2d Matrix to File
+    //Write a 1d Matrix with Gene Number to File
     static void putMatrix(Double m[], String f) throws IOException
     {
         try (FileWriter fw = new FileWriter(new File(f))) {
+            fw.write("Gene Number, Result1\n");
             for(int i=0; i<m.length; i++)
             {
                 fw.write("g"+(i+1)+","+m[i]+"\n");
+            }
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    //Write 2 1d Matrices with Gene Number to File
+    static void putMatrix(Double m[], Double n[], String f) throws IOException
+    {
+        try (FileWriter fw = new FileWriter(new File(f))) {
+            fw.write("Gene Number, Result1, Result2\n");
+            for(int i=0; i<m.length; i++)
+            {
+                fw.write("g"+(i+1)+","+m[i]+","+n[i]+"\n");
+            }
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    // Print 2d Matrix with gene Number to File
+    static void putMatrix(Double m[][], String f) throws IOException
+    {
+        try (FileWriter fw = new FileWriter(new File(f))) {
+            fw.write("Gene Number\n");
+            for(int i=0; i<m.length; i++)
+            {
+                fw.write("g"+(i+1)+",");
+                for(int j=0; j<m[i].length; j++)
+                {
+                    fw.write(m[i][j]+",");
+                }
+                fw.write("\n");
             }
         } catch(IOException e)
         {

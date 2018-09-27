@@ -9,10 +9,15 @@ public class Main {
         System.out.println("Enter Filter Value : ");
         Double filter=(new Scanner(System.in).nextDouble());
         SAM sam = new SAM(normal,tumor);
+        FoldChange fc = new FoldChange(normal,tumor);
         Double deg[]=sam.compute();
-        Helper.putMatrix(deg, "output.csv");
+        Double degFC[]=fc.compute();
+        System.out.println("Results from SAM:");
         Helper.printMatrixFiltered(deg, filter);
-        //Helper.printMatrix(deg);
+        System.out.println("Results from FoldChange:");
+        Helper.printMatrixFiltered(degFC, filter);
+        Helper.putMatrix(deg,degFC, "output.csv");
+        
     }
 }
 
