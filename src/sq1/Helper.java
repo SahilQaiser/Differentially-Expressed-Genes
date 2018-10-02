@@ -56,6 +56,16 @@ public class Helper {
         }
         return median;
     }
+    //Get Median
+    static Double getRowMedian(int k,Double m[][])
+    {
+        Double median=0.0;
+        median=m[k][0];
+        Double row[]=m[k];
+        Arrays.sort(row);
+        median=row[(1+row.length)/2];            
+        return median;
+    }
     
     
     //Get A 2d matrix for a File
@@ -205,13 +215,13 @@ public class Helper {
         XB=XA=0.0;
         for(int j=0; j<A[0].length; j++)
         {
-            Double t1=A[i][j]-getRowMean(A[i]);
-            XA+=(t1*t1);
+            Double t1=A[i][j]-getRowMean(A[i]);     //t1=xi-x`
+            XA+=(t1*t1);                            //Summation(t1^2)
         }
         for(int j=0; j<B[0].length; j++)
         {
-            Double t2=B[i][j]-getRowMean(B[i]);
-            XB+=(t2*t2);
+            Double t2=B[i][j]-getRowMean(B[i]);     //t2=yi-y`
+            XB+=(t2*t2);                            //Summation(t2^2)
         }
         Double lenA=new Double(A[0].length);
         Double lenB=new Double(B[0].length);
@@ -220,18 +230,28 @@ public class Helper {
         x=Math.sqrt(x);
         return x;
     }
-    //Variation For an Array s=(x-x`)^2/n
-    static Double var(int i,Double [][]A) //Standard Deviation
+    //Variation For an Array s=Summation(x-x`)^2/n
+    static Double var(int i,Double [][]A) //RowWise
     {
         Double x,XA;
         XA=0.0;
         for(int j=0; j<A[0].length; j++)
         {
-            Double t1=A[i][j]-getRowMean(A[i]);
-            XA+=(t1*t1);
+            Double t1=A[i][j]-getRowMean(A[i]); //t1=xi-x`
+            XA+=(t1*t1);                        //Summation(t1^2)
         }
-        Double lenA=new Double(A[0].length);
-        x=(XA)/lenA;
+        Double lenA=new Double(A[0].length);    
+        x=(XA)/lenA;                            //Summation(t1^2)/n
+        return x;
+    }
+    //Variation For a 2d Array s=Summation(x-x`)^2/n
+    static Double[] var(Double [][]A) //All Records
+    {
+        Double x[]=new Double[A.length];
+        for(int j=0; j<A.length; j++)
+        {
+            x[j]=var(j,A);
+        }
         return x;
     }
     
