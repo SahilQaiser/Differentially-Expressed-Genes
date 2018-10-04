@@ -14,7 +14,7 @@ public class SAM {
             Double Xi,Yi;
             Xi=Helper.getRowMean(A[i]);          
             Yi=Helper.getRowMean(B[i]);             
-            d[i]=(Xi-Yi)/(Helper.s(i,A,B)+Helper.s0(A,B));                  //Xi-Yi/s(i)+s0
+            d[i]=(Helper.max(Xi,Yi)-Helper.min(Xi,Yi))/(Helper.s(i,A,B)+Helper.s0(A,B));                  //Abs(Xi-Yi)/s(i)+s0
             //System.out.println((i+1)+"th Gene : "+s(i)+"Mean : "+Helper.getRowMean(A[i])+","+Helper.getRowMean(B[i]));
         }
         return d;

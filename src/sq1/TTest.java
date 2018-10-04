@@ -17,8 +17,8 @@ public class TTest {
             Yi=Helper.getRowMean(B[i]);
             SXi=Helper.var(i, A);
             SYi=Helper.var(i, B);
-            Double SXY = Math.sqrt(SXi+SYi);        //(Sx1-Sx2)=Sqrt(S1^2/n1+S2^2/n2)
-            ti[i]=(Xi-Yi)/SXY;                      //(X`1-X`2)/(Sx1-Sx2)
+            Double SXY = Math.sqrt(SXi+SYi);            //(Sx1-Sx2)=Sqrt(S1^2/n1+S2^2/n2)
+            ti[i]=(Helper.max(Xi,Yi)-Helper.min(Xi,Yi))/SXY;                          //(X`1-X`2)/(Sx1-Sx2)
         }
         return ti;
     }
@@ -32,7 +32,7 @@ public class TTest {
         {
             Double Xi=Helper.var(i, A);                 //X`k1
             Double Yi=Helper.var(i, B);                 //X`k2
-            tk[i]=(Xi-Yi);                              //X`k1-X`k2
+            tk[i]=Helper.max(Xi,Yi)-Helper.min(Xi, Yi);                              //X`k1-X`k2
             Double vk1=VstarK(i,A);                     //V*k1/n1 
             Double vk2=VstarK(i,B);                     //V*k2/n2
             tk[i]=tk[i]/(Math.sqrt(vk1+vk2));           //(X`k1-X`k2)/sqrt(v*k1/n1+v*k2/n2)
@@ -67,8 +67,8 @@ public class TTest {
     Double VstarK(int k, Double M[][]){             //Formula for Vk*/n
         Double vk=0.0;
         Double n=Double.valueOf(M[k].length);
-        vk=Y(k,M)*(Helper.getRowMedian(k,M));   //Median For kth Row
-        vk+=(1-Y(k,M))*Helper.var(k, M);        //(Y*Vmedian+(1-Y)*Var[k])
+        vk=Y(k,M)*(Helper.getRowMedian(k,M));       //Median For kth Row
+        vk+=(1-Y(k,M))*Helper.var(k, M);            //(Y*Vmedian+(1-Y)*Var[k])
         return vk/n;
     }
     Double Vk(int i,Double M[][]){
@@ -76,7 +76,7 @@ public class TTest {
         return (n/(n-1)*Wk(i,M));
     }
     //Summation (Variance(Vk))
-    Double Y(int k, Double M[][])               //Formula for Lambda*
+    Double Y(int k, Double M[][])                   //Formula for Lambda*
     {
         Double y=0.0;
         Double numerator=0.0;
@@ -88,7 +88,7 @@ public class TTest {
             denominator+=(x*x);
         }   
         y=numerator/denominator;
-        return (Helper.min(1.0, y));            //Min[1,{Summation(Variance(Vk))/Summation((Vk-Vmedian)^2}]
+        return (Helper.min(1.0, y));                //Min[1,{Summation(Variance(Vk))/Summation((Vk-Vmedian)^2}]
     }
     
 }

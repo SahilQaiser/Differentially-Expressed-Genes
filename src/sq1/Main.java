@@ -6,22 +6,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Double normal[][] = Helper.getMatrix(args[0]);
         Double tumor[][]=Helper.getMatrix(args[1]);
-//        System.out.println("Enter Filter Value : ");
-//        Double filter=(new Scanner(System.in).nextDouble());
-//        SAM sam = new SAM(normal,tumor);
-//        FoldChange fc = new FoldChange(normal,tumor);
-//        Double deg[]=sam.compute();
-//        Double degFC1[]=fc.computeByMean();
-//        Double degFC2[]=fc.computeByMedian();
-//        System.out.println("Results from SAM:");
-//        Helper.printMatrixFiltered(deg, filter);
-//        System.out.println("Results from FoldChange [Mean] :");
-//        Helper.printMatrixFiltered(degFC1, filter);
-//        System.out.println("Results from FoldChange [Median] :");
-//        Helper.printMatrixFiltered(degFC2, filter);
-//        Helper.putMatrix(deg,degFC1, args[2]);  //Writing to Output File degs.csv
-        TTest tShrink = new TTest(normal,tumor);
-        Helper.printMatrix(tShrink.computeShrinkage());
+        //FoldChange fold = new FoldChange(normal,tumor);
+        //SAM sam = new SAM(normal,tumor);
+        //System.out.println("SAM\t\t\tFoldChange_Median");
+        //Helper.printMatrix(sam.compute(),fold.computeByMedian());
+        TTest ttest = new TTest(normal,tumor);
+        Helper.putMatrix(ttest.computeSimple(), args[2]);
+        //System.out.println("TTest_Simple\t\t\tTTest_Shrinkage");
+        //Helper.printMatrix(ttest.computeSimple(),ttest.computeShrinkage());
     }
 }
 
